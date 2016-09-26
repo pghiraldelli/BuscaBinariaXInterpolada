@@ -1,3 +1,4 @@
+import numpy
 
 def buscaBinaria(lista, valor):
   limiteSuperior = len(lista)-1
@@ -32,8 +33,14 @@ def buscaInterpolada(lista, valor):
 
   return [False, totalIteracoes]
 
+def geraListaAleatoriaOrdenada(tamanho):
+  lista = numpy.random.randint(0, tamanho, tamanho)
+  lista.sort()
+  return lista
+
 def main():
-  lista = [1,4,5,6,9,30,31,89]
+  lista = geraListaAleatoriaOrdenada(100)
+  print lista
   print "Binaria"
   solBin = buscaBinaria(lista, 9)
   print solBin
