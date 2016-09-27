@@ -25,15 +25,16 @@ def buscaInterpolada(lista, valor):
   totalIteracoes = 0  
 
   while (limiteInferior <= limiteSuperior) and (valor >= lista[limiteInferior]) and (valor <= lista[limiteSuperior]):
-    totalIteracoes += 1
-    fracao = (valor - lista[limiteInferior]) // (lista[limiteSuperior] - lista[limiteInferior])
-    meio = limiteInferior + (limiteSuperior - limiteInferior) * fracao
-    if (lista[meio] == valor): 
-      return ["Achou", totalIteracoes]
-    elif (lista[meio] > valor): limiteSuperior = meio - 1
-    else: limiteInferior = meio + 1
+  	totalIteracoes += 1
+    	fracao = float(valor - lista[limiteInferior]) / (lista[limiteSuperior] - lista[limiteInferior])
+    	meio = int(limiteInferior + (limiteSuperior - limiteInferior) * fracao)
 
-  return ["Nao achou", totalIteracoes]
+    	if (lista[meio] < valor): limiteInferior = meio + 1;
+	elif (valor < lista[meio]): limiteSuperior = meio - 1;
+    	else: return ["Achou", totalIteracoes]
+   
+  if (valor == lista[limiteInferior]): return ["Achou", totalIteracoes]
+  else: return ["Nao achou", totalIteracoes]
 
 '''Gera uma lista ordenada e sem repeticao de numeros aleatorios de zero a tamanhoDaLista*10.'''
 def geraListaAleatoriaOrdenada(tamanho):
@@ -53,9 +54,9 @@ def geraListaBinariaMelhor():
 	  num += 1
   return lista
 
-'''Gera uma lista ordenada e sem repeticao, seguindo uma distribuicao uniforme de tamanho 10000.'''
+'''Gera uma lista ordenada e sem repeticao, de números pares, de tamanho 10000.'''
 def geraListaInterpoladaMelhor():
-  tamanho = 100
+  tamanho = 10000
   lista = []
   for i in range (0,tamanho):
 	lista.append(i*2)
