@@ -1,7 +1,9 @@
 import random
+import time
 
 '''Busca um elemento em uma lista, partindo sempre do meio do array e comparando as duas metades.'''
 def buscaBinaria(lista, valor):
+  tempoInicio = time.time()
   limiteSuperior = len(lista)-1
   limiteInferior = 0
   totalIteracoes = 0  
@@ -10,16 +12,19 @@ def buscaBinaria(lista, valor):
     totalIteracoes += 1
     meio = (limiteInferior + limiteSuperior)/2
 
-    if (lista[meio] == valor): 
-      return ["Achou", totalIteracoes]
+    if (lista[meio] == valor):
+      tempoFim = time.time() 
+      return ["Achou", totalIteracoes,tempoFim-tempoInicio]
     elif (lista[meio] > valor): limiteSuperior = meio - 1
     else: limiteInferior = meio + 1
 
-  return ["Nao achou", totalIteracoes]
+  tempoFim = time.time()
+  return ["Nao achou", totalIteracoes, tempoFim-tempoInicio]
 
 '''Busca um elemento numa lista, levando em consideracao uma distribuicao uniforme, calculando a posicao
 onde o elemento se encontra a partir de seu valor e incrementando de 1 caso nao o encontre na primeira vez. '''
 def buscaInterpolada(lista, valor):
+  tempoInicio = time.time()
   limiteSuperior = len(lista)-1
   limiteInferior = 0
   totalIteracoes = 0  
@@ -31,10 +36,11 @@ def buscaInterpolada(lista, valor):
 
     	if (lista[meio] < valor): limiteInferior = meio + 1;
 	elif (valor < lista[meio]): limiteSuperior = meio - 1;
-    	else: return ["Achou", totalIteracoes]
-   
-  if (valor == lista[limiteInferior]): return ["Achou", totalIteracoes]
-  else: return ["Nao achou", totalIteracoes]
+    	else: tempoFim = time.time(); return ["Achou", totalIteracoes, tempoFim-tempoInicio]
+
+  tempoFim = time.time();
+  if (valor == lista[limiteInferior]): return ["Achou", totalIteracoes, tempoFim-tempoInicio]
+  else: return ["Nao achou", totalIteracoes, tempoFim-tempoInicio]
 
 '''Gera uma lista ordenada e sem repeticao de numeros aleatorios de zero a tamanhoDaLista*10.'''
 def geraListaAleatoriaOrdenada(tamanho):
@@ -42,7 +48,7 @@ def geraListaAleatoriaOrdenada(tamanho):
   lista.sort()
   return lista
 
-'''Gera uma lista ordenada e sem repeticao que nao segue uma distribuicao uniforme. Ela e preenchida com zeros ate a metade e depois preenchida com valores maiores que zero e menores que 50.'''
+'''Gera uma lista ordenada e sem repeticao que nao segue uma distribuicao uniforme. Ela e preenchida com zeros ate a metade e depois preenchida com valores de 1 ate tamanho/2.'''
 def geraListaBinariaMelhor():
   tamanho = 10000
   lista = []
@@ -54,7 +60,7 @@ def geraListaBinariaMelhor():
 	  num += 1
   return lista
 
-'''Gera uma lista ordenada e sem repeticao, de números pares, de tamanho 10000.'''
+'''Gera uma lista ordenada e sem repeticao, de numeros pares, de tamanho 10000.'''
 def geraListaInterpoladaMelhor():
   tamanho = 10000
   lista = []
